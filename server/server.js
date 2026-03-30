@@ -12,7 +12,14 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    /\.vercel\.app$/,  // allow all vercel subdomains
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 
 const limiter = rateLimit({
